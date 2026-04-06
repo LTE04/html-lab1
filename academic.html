@@ -1,29 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Academic Record">
+    <title>Academic</title>
+</head>
 
+<body>
 
-<h1>About Me</h1>
-<h2>I am Software Engineering Student at UTM</h2>
-<h3>Small Title</h3>
-<h4>Smaller</h4>
+<header>
+    <h1>Academic Record</h1>
+</header>
 
-<p>I Study at <strong>KMPh when pre u.</strong></p>
+<nav>
+    <a href="index.html">Home</a>
+</nav>
 
-/* <p>This is <em>emphasis.</em></p>
-<p>This is <b>bold.</b></p>
-<p>This is <i>italic.</i></p> */
+<main>
 
-<blockquote cite="URL">
-	URL is The source of the quotation.
-</blockquote>
+<section>
 
-<cite>w3school</cite>
+<table border="1" cellpadding="10" cellspacing="0">
+    <caption>Year 1 Academic Results</caption>
 
-<p><abbr title="HyperText Markup Language">HTML</abbr></p>
+    <thead>
+        <tr>
+            <th scope="col">Semester</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Credits</th>
+            <th scope="col">Grade</th>
+        </tr>
+    </thead>
 
-<p><dfn>HTML</dfn>is a language for web.</p>
+    <tbody>
 
-<p>H<sub>2</sub>0</p>
-<p>10<sup>4</sub></p>
+        <!-- SEMESTER 1 -->
+        <tr>
+            <th scope="row" rowspan="4">Semester 1</th>
+            <td>Web Development</td>
+            <td>3</td>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>Programming</td>
+            <td>4</td>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>Database</td>
+            <td>3</td>
+            <td>A-</td>
+        </tr>
+        <tr>
+            <td>Mathematics</td>
+            <td>3</td>
+            <td>A</td>
+        </tr>
 
-<p><mark>This is important text. it mark and highlight it.</mark></p>
+        <!-- SEMESTER 2 -->
+        <tr>
+            <th scope="row" rowspan="4">Semester 2</th>
+            <td>Advanced Web</td>
+            <td>3</td>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>Data Structure</td>
+            <td>4</td>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>Operating System</td>
+            <td>3</td>
+            <td>A-</td>
+        </tr>
+        <tr>
+            <td>Software Engineering</td>
+            <td>3</td>
+            <td>A</td>
+        </tr>
 
-<small>tung ern _ 2026</small>
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="2">Total Credits</td>
+            <td><strong>26</strong></td>
+            <td>-</td>
+        </tr>
+    </tfoot>
+
+</table>
+
+</section>
+
+</main>
+
+<footer>
+    <p><small>© 2026 Portfolio</small></p>
+</footer>
+
+</body>
+</html>
