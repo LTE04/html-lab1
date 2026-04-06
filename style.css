@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+/* ================= ROOT VARIABLES ================= */
+:root {
+    --primary: #1e3a8a;
+    --secondary: #2563eb;
+    --accent: #facc15;
+
+    --light: #f8fafc;
+    --dark: #0f172a;
+    --gray: #94a3b8;
+
+    --font-main: 'Roboto', sans-serif;
+
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 2rem;
+}
+
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: var(--font-main);
+    font-size: 1.6rem;
+    background: var(--light);
+    color: var(--dark);
+}
+
+/* ================= TYPOGRAPHY ================= */
+h1 { font-size: 3rem; }
+h2 { font-size: 2.4rem; }
+h3 { font-size: 2rem; }
+p  { line-height: 1.6; }
+
+/* ================= HEADER ================= */
+header {
+    background: var(--primary);
+    color: white;
+    padding: var(--space-lg);
+    text-align: center;
+}
+
+/* ================= NAV (FLEXBOX) ================= */
+nav {
+    position: sticky;
+    top: 0;
+    background: var(--secondary);
+    padding: var(--space-md);
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: var(--space-sm) var(--space-md);
+    transition: 0.2s;
+}
+
+nav a:hover {
+    background: var(--accent);
+    color: black;
+    border-radius: 5px;
+}
+
+/* ================= MAIN ================= */
+main {
+    padding: var(--space-lg);
+}
+
+/* ================= CARDS (GRID) ================= */
+.card {
+    background: white;
+    padding: var(--space-md);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    transition: 0.2s;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+}
+
+/* ================= TABLE ================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid var(--gray);
+    padding: var(--space-sm);
+}
+
+tbody tr:nth-child(even) {
+    background: #f1f5f9;
+}
+
+/* ================= FORM ================= */
+form {
+    max-width: 500px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: var(--space-sm);
+    margin-bottom: var(--space-md);
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 5px var(--accent);
+}
+
+button {
+    background: var(--primary);
+    color: white;
+    padding: var(--space-md);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--secondary);
+}
+
+/* ================= FOOTER ================= */
+footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: var(--space-lg);
+}
+
+/* ================= MEDIA QUERY ================= */
+
+/* Tablet */
+@media (min-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
