@@ -1,0 +1,1592 @@
+:root {
+  /* --- Primary Colours 主色 --- */
+  --color-primary:    #1a1a2e;   /* deep navy 深海军蓝 */
+  --color-secondary:  #16213e;   /* dark ink 深墨色 */
+
+  /* --- Accent Colours 强调色 --- */
+  --color-accent:     #e8d5b7;   /* warm parchment 温暖羊皮纸色 */
+  --color-accent-2:   #c9a96e;   /* antique gold 古铜金色 */
+
+  /* --- Neutral Greys 中性灰 --- */
+  --color-text:       #1a1a1a;   /* near-black text 近黑色文字 */
+  --color-muted:      #6b6b7a;   /* muted secondary text 哑光次要文字 */
+  --color-surface:    #f5f4f0;   /* warm off-white surface 温暖米白色背景 */
+
+  /* --- Additional Colours 其他颜色 --- */
+  --color-border:     #dbd8d0;   /* subtle border 微妙边框色 */
+  --color-white:      #ffffff;
+  --color-success:    #2d6a4f;   /* pass/success green 通过/成功绿色 */
+  --color-dark-bg:    #0f0f1a;   /* deepest background 最深背景色 */
+
+  /* --- Font Families 字体系列 --- */
+  --font-heading:     'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body:        'DM Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+
+  /* --- Spacing Scale 间距比例 --- */
+  --space-xs:         0.4rem;    /*  4px */
+  --space-sm:         0.8rem;    /*  8px */
+  --space-md:         1.6rem;    /* 16px */
+  --space-lg:         3.2rem;    /* 32px */
+  --space-xl:         6.4rem;    /* 64px */
+
+  /* --- Border Radius 圆角 --- */
+  --radius-sm:        4px;
+  --radius-md:        8px;
+  --radius-lg:        16px;
+
+  /* --- Shadows 阴影 --- */
+  --shadow-sm:        0 2px 8px rgba(26, 26, 46, 0.08);
+  --shadow-md:        0 4px 24px rgba(26, 26, 46, 0.12);
+  --shadow-lg:        0 8px 40px rgba(26, 26, 46, 0.18);
+  --shadow-focus:     0 0 0 3px var(--color-accent-2); /* accessible focus ring 无障碍焦点环 */
+
+  /* --- Transitions 过渡动画 --- */
+  --transition-fast:  0.2s ease;
+  --transition-mid:   0.35s ease;
+
+  /* --- Layout 布局 --- */
+  --max-width:        1200px;
+  --nav-height:       64px;
+}
+
+
+/* ============================================================
+  Lab 2 Task 1 | 实验二任务一: CSS Reset Block
+  CSS 重置块
+  
+  box-sizing: border-box — includes padding/border in element size
+  box-sizing: border-box — 在元素尺寸中包含内边距和边框
+  
+  Removes default margin/padding, sets base font-size
+  删除默认外边距/内边距，设置基础字体大小
+  
+  font-size: 62.5% on html makes 1rem = 10px for easy calculation
+  html 上的 font-size: 62.5% 使 1rem = 10px，便于计算
+============================================================ */
+
+/* Universal box-sizing reset | 通用 box-sizing 重置 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;  
+  /* 
+    WHY box-sizing: border-box? 为什么用 border-box？
+    Default content-box: width does NOT include padding/border (confusing!)
+    默认 content-box：宽度不包含内边距/边框（容易混淆！）
+    border-box: width INCLUDES padding and border — much more intuitive
+    border-box：宽度包含内边距和边框 — 更符合直觉
+  */
+}
+
+html {
+  font-size: 62.5%;
+  /*
+    WHY 62.5%? 为什么是 62.5%？
+    Browser default font-size = 16px | 浏览器默认字体大小 = 16px
+    62.5% of 16px = 10px | 62.5% × 16px = 10px
+    Now: 1rem = 10px, 1.6rem = 16px, 2.4rem = 24px (easy maths!)
+    现在：1rem = 10px，1.6rem = 16px，2.4rem = 24px（简单易算！）
+  */
+  scroll-behavior: smooth;  /* smooth anchor link scrolling | 平滑锚点滚动 */
+}
+
+body {
+  margin: 0;          /* remove default body margin | 删除默认 body 外边距 */
+  padding: 0;         /* remove default body padding | 删除默认 body 内边距 */
+  font-family: var(--font-body);
+  font-size: 1.6rem;  /* 16px = comfortable reading size | 16px = 舒适阅读尺寸 */
+  line-height: 1.7;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  /* 
+    Subtle grain texture overlay for luxury feel | 微妙纹理叠加营造高级感
+    Uses a radial gradient to add depth to flat background
+    使用径向渐变为平面背景增添深度
+  */
+  background-image: 
+    radial-gradient(ellipse at 20% 50%, rgba(26,26,46,0.03) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(201,169,110,0.04) 0%, transparent 60%);
+}
+
+/* Remove default list styles where needed | 在需要的地方删除默认列表样式 */
+ul, ol {
+  /* Reset only for nav — preserve semantic lists elsewhere */
+  /* 仅为导航重置 — 保留其他地方的语义列表样式 */
+}
+
+img {
+  /* Lab 2 Task 5 | 实验二任务五: Responsive images | 响应式图片 */
+  max-width: 100%;   /* image never overflows its container | 图片不会溢出容器 */
+  height: auto;      /* maintain aspect ratio | 保持宽高比 */
+  display: block;    /* removes default inline spacing below images | 删除图片下方的默认行内间距 */
+}
+
+/* ============================================================
+  Lab 2 Task 2 | 实验二任务二: 
+  Typographic Scale — rem units throughout
+  排版比例 — 全部使用 rem 单位
+  
+  h1–h4, p, small, blockquote, code, caption must ALL have 
+  explicit font-size, line-height, and color
+  h1–h4、p、small、blockquote、code、caption 都必须有明确的
+  font-size、line-height 和 color
+============================================================ */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-top: 0;
+  font-weight: 600;
+}
+
+h1 { font-size: 4.8rem; }   /* 48px | page title 页面标题 */
+h2 { font-size: 3.6rem; }   /* 36px | section heading 区块标题 */
+h3 { font-size: 2.4rem; }   /* 24px | subsection heading 子区块标题 */
+h4 { font-size: 2.0rem; }   /* 20px | minor heading 次要标题 */
+
+p {
+  font-size: 1.6rem;   /* 16px */
+  line-height: 1.75;
+  color: var(--color-text);
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+}
+
+small {
+  font-size: 1.2rem;   /* 12px */
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+/* Task 2 | 任务二: <blockquote> styling */
+blockquote {
+  font-size: 1.8rem;   /* 18px — slightly larger than body | 比正文略大 */
+  line-height: 1.6;
+  color: var(--color-secondary);
+  font-family: var(--font-heading);
+  font-style: italic;
+  /*
+    MARGIN vs PADDING explanation 外边距与内边距说明:
+    margin: space OUTSIDE the element, pushes it away from neighbours
+    margin：元素外部的空间，将其与相邻元素推开
+    padding: space INSIDE the element, between content and border
+    padding：元素内部的空间，位于内容与边框之间
+  */
+  margin: var(--space-lg) 0;      /* margin: space outside, separates from sibling p elements */
+  padding: var(--space-md) var(--space-lg);  /* padding: space inside, around the quote text */
+  border-left: 4px solid var(--color-accent-2);
+  background-color: rgba(232, 213, 183, 0.12);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+blockquote p {
+  margin-bottom: var(--space-sm);
+}
+
+blockquote footer {
+  font-size: 1.4rem;
+  font-style: normal;
+  color: var(--color-muted);
+}
+
+/* <cite> element styling | <cite> 元素样式 */
+cite {
+  font-style: italic;
+  color: var(--color-accent-2);
+}
+
+/* code element | code 元素 */
+code {
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: var(--color-primary);
+  background-color: rgba(26, 26, 46, 0.06);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* table caption | 表格标题 */
+caption {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-family: var(--font-heading);
+  caption-side: top;
+  padding: var(--space-md) var(--space-sm) var(--space-sm);
+  text-align: left;
+}
+
+/* <abbr> tooltip underline | 缩写词下划线 */
+abbr[title] {
+  text-decoration: underline dotted var(--color-accent-2);
+  cursor: help;
+}
+
+/* <mark> highlight | 高亮标记 */
+mark {
+  background-color: rgba(201, 169, 110, 0.25);
+  color: var(--color-primary);
+  padding: 0 0.3rem;
+  border-radius: 2px;
+}
+
+/* <dfn> term definition | 术语定义 */
+dfn {
+  font-style: italic;
+  color: var(--color-secondary);
+  border-bottom: 1px dashed var(--color-accent-2);
+  cursor: help;
+}
+
+/* <sup> and <sub> | 上下标 */
+sup, sub {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+/* footnote paragraph | 脚注段落 */
+.footnote {
+  font-size: 1.2rem;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+
+/* ============================================================
+  Lab 2 Task 2 | 实验二任务二: 
+  Link states — all four: :link, :visited, :hover, :active
+  链接四种状态 — 每种必须视觉上有区别
+============================================================ */
+
+a:link {
+  color: var(--color-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-accent-2);
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+
+a:visited {
+  color: var(--color-muted);
+  text-decoration-color: var(--color-border);
+}
+
+a:hover {
+  color: var(--color-accent-2);
+  text-decoration-color: var(--color-accent-2);
+}
+
+a:active {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+
+/* ============================================================
+  Lab 2 Task 3 | 实验二任务三: 
+  Navigation & Header with Flexbox
+  使用 Flexbox 构建导航栏和 header
+
+  FLEXBOX EXPLAINED | Flexbox 说明:
+  display: flex — creates a flex container | 创建弹性容器
+  Children become flex items | 子元素成为弹性项目
+============================================================ */
+
+/* --- Site Header --- */
+.site-header {
+  background-color: var(--color-primary);
+  color: var(--color-accent);
+  padding: var(--space-lg) var(--space-lg) var(--space-md);
+  
+  /*
+    FLEXBOX: row layout, text left + image right, vertically centred
+    Flexbox：行布局，文字在左，图片在右，垂直居中
+    
+    display: flex — enables flexbox on this element
+                    在此元素上启用 flexbox
+    align-items: center — vertically centres all flex children
+                          垂直居中所有弹性子项目
+    flex-wrap: wrap — children wrap to next line on narrow screens
+                      在窄屏幕上子项目换行
+    gap: space between flex items | 弹性项目之间的间距
+  */
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  position: relative;
+}
+
+.site-header::before {
+  /*
+    Lab 2 Task 6 | 实验二任务六: ::before pseudo-element
+    ::before 伪元素 — decorative gold bar at top of header
+    ::before 伪元素 — header 顶部的装饰性金条
+    
+    content: '' is REQUIRED for pseudo-elements to render
+    content: '' 是伪元素渲染所必需的
+  */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-accent-2), var(--color-accent), var(--color-accent-2));
+}
+
+.site-title {
+  font-size: 4.0rem;
+  color: var(--color-accent);
+  margin: 0;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  flex: 1;  /* takes up remaining space | 占据剩余空间 */
+  min-width: 200px;
+}
+
+.site-tagline {
+  font-size: 1.4rem;
+  color: rgba(232, 213, 183, 0.75);
+  margin: var(--space-xs) 0 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  flex-basis: 100%;  /* forces tagline to its own row | 强制标语占据自己的行 */
+}
+
+.site-tagline em, .site-tagline strong {
+  color: var(--color-accent);
+}
+
+/* Profile figure in header | header 中的头像 */
+.profile-figure {
+  margin: 0;
+  text-align: center;
+  flex-shrink: 0;  /* prevents figure from shrinking | 防止图片容器缩小 */
+}
+
+.profile-img {
+  border-radius: 50%;  /* Lab 2 Task 2 | 实验二任务二: border-radius on profile image */
+  border: 3px solid var(--color-accent-2);
+  box-shadow: var(--shadow-md);  /* Lab 2 Task 2 | 实验二任务二: box-shadow for depth */
+  object-fit: cover;
+  transition: transform var(--transition-mid);
+}
+
+.profile-img:hover {
+  transform: scale(1.05);
+}
+
+.profile-figure figcaption {
+  color: rgba(232, 213, 183, 0.6);
+  font-size: 1.1rem;
+  margin-top: var(--space-xs);
+}
+
+
+/* ============================================================
+  Lab 2 Task 3 | 实验二任务三: 
+  Sticky Navigation with Flexbox
+  使用 Flexbox 构建粘性导航
+  
+  position: sticky — element sticks in viewport during scroll
+  position: sticky — 滚动时元素固定在视口中
+  top: 0 — sticks to the very top of viewport | 固定在视口顶部
+  z-index — stacking order (higher = on top) | 堆叠顺序（越高越靠前）
+============================================================ */
+
+.site-nav {
+  background-color: var(--color-secondary);
+  border-bottom: 2px solid var(--color-accent-2);
+  
+  /*
+    position: sticky keeps nav visible while scrolling
+    position: sticky 在滚动时保持导航可见
+  */
+  position: sticky;
+  top: 0;
+  z-index: 100;  /* above all page content | 在所有页面内容之上 */
+  
+  /*
+    FLEXBOX: horizontal nav bar
+    Flexbox：水平导航栏
+    justify-content: space-between — logo left, links right
+    justify-content: space-between — 标志在左，链接在右
+  */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--space-lg);
+  min-height: var(--nav-height);
+}
+
+/* Navigation list | 导航列表 */
+.nav-list {
+  /*
+    FLEXBOX: horizontal row of nav links
+    Flexbox：导航链接的水平行
+    
+    flex-wrap: wrap — links wrap on narrow screens WITHOUT media query
+    flex-wrap: wrap — 在窄屏幕上链接自动换行，无需媒体查询
+    gap — spacing between items | 项目之间的间距
+  */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  list-style: none;  
+  margin: 0;
+  padding: 0;
+}
+
+/* Nav link styling | 导航链接样式 */
+.nav-list a {
+  display: block;
+  padding: var(--space-sm) var(--space-md);
+  color: var(--color-accent);
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius-sm);
+  
+  /*
+    Lab 2 Task 3 | 实验二任务三: CSS transition on nav links
+    导航链接上的 CSS 过渡动画
+    transition must change BOTH color and background-color on hover
+    过渡动画必须在悬停时同时改变 color 和 background-color
+  */
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+  border-bottom: 2px solid transparent;
+}
+
+.nav-list a:link,
+.nav-list a:visited {
+  color: rgba(232, 213, 183, 0.8);
+  text-decoration: none;
+}
+
+.nav-list a:hover {
+  color: var(--color-accent);
+  background-color: rgba(232, 213, 183, 0.1);
+  text-decoration: none;
+}
+
+.nav-list a:active {
+  background-color: rgba(232, 213, 183, 0.2);
+}
+
+/*
+  Lab 2 Task 3 | 实验二任务三: .active class for current page nav link
+  当前页面导航链接的 .active 类
+  A coloured bottom border marks the active page link
+  彩色底部边框标记当前页面的导航链接
+*/
+.nav-list a.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent-2);
+  background-color: rgba(232, 213, 183, 0.08);
+}
+
+
+/* ============================================================
+  Lab 2 Task 2 | 实验二任务二: 
+  <main> and <footer> landmark styling
+  <main> 和 <footer> 地标元素样式
+  
+  Each has distinct background-color, padding, and color
+  每个都有独特的 background-color、padding 和 color
+============================================================ */
+
+.site-main {
+  /*
+    PADDING vs MARGIN (内边距 vs 外边距):
+    padding here: inner breathing room around main content
+    padding：主内容周围的内部留白空间
+    No margin needed on main — it fills the full available width
+    main 不需要 margin — 它填充全部可用宽度
+  */
+  padding: var(--space-lg) var(--space-lg);
+  max-width: var(--max-width);
+  margin: 0 auto;  /* centre the main content | 居中主内容 */
+  min-height: calc(100vh - var(--nav-height) - 200px);
+}
+
+.site-footer {
+  background-color: var(--color-primary);
+  color: var(--color-accent);
+  padding: var(--space-lg);
+  /*
+    MARGIN vs PADDING: footer uses padding (inside space) for content
+    外边距 vs 内边距：页脚使用 padding（内部空间）来布局内容
+    margin-top: auto would push it to the bottom in flex layouts
+    在 flex 布局中，margin-top: auto 会将其推到底部
+  */
+  text-align: center;
+  border-top: 4px solid var(--color-accent-2);
+}
+
+.footer-address {
+  font-style: normal;  /* <address> defaults to italic — override | <address> 默认斜体，覆盖此样式 */
+  font-size: 1.4rem;
+  color: rgba(232, 213, 183, 0.8);
+  line-height: 1.9;
+  margin-bottom: var(--space-md);
+}
+
+.footer-address a:link,
+.footer-address a:visited {
+  color: var(--color-accent-2);
+}
+
+.footer-address a:hover {
+  color: var(--color-accent);
+}
+
+.site-footer small {
+  color: rgba(232, 213, 183, 0.5);
+}
+
+
+/* ============================================================
+  SECTIONS — shared section styles | 共享区块样式
+============================================================ */
+
+.content-section {
+  margin-bottom: var(--space-xl);
+}
+
+.content-section h2 {
+  /*
+    Lab 2 Task 6 | 实验二任务六: ::before pseudo-element on section headings
+    在区块标题上使用 ::before 伪元素添加装饰性左侧色条
+  */
+  position: relative;
+  padding-left: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.content-section h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  bottom: 0.1em;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--color-accent-2), var(--color-accent));
+  border-radius: 2px;
+}
+
+.full-width-section {
+  max-width: 100%;
+}
+
+.hero-quote,
+.content-quote {
+  position: relative;
+}
+
+/* 
+  Lab 2 Task 6 | 实验二任务六: ::before on blockquote for decorative quote mark
+  在 blockquote 上用 ::before 添加装饰性引号
+  content: '"' provides the decorative opening quote
+  content: '"' 提供装饰性开引号
+*/
+.hero-quote::before,
+.content-quote::before {
+  content: '\201C'; /* Unicode left double quotation mark | Unicode 左双引号 */
+  font-family: var(--font-heading);
+  font-size: 8rem;
+  color: var(--color-accent-2);
+  opacity: 0.3;
+  position: absolute;
+  top: -2rem;
+  left: var(--space-sm);
+  line-height: 1;
+  pointer-events: none;
+}
+
+
+/* ============================================================
+  Lab 2 Task 4 | 实验二任务四: 
+  CSS GRID — Card Grid Layout (index.html)
+  CSS Grid 卡片网格布局
+  
+  CSS GRID EXPLAINED | CSS Grid 说明:
+  display: grid — creates a grid container | 创建网格容器
+  grid-template-columns — defines column structure | 定义列结构
+  repeat(auto-fit, minmax(260px, 1fr)):
+    - auto-fit: columns fill row, empty ones collapse | 列填满行，空列折叠
+    - minmax(260px, 1fr): min 260px, max 1 fraction | 最小260px，最大1份
+    - This creates RESPONSIVE columns WITHOUT media queries!
+      这无需媒体查询即可创建响应式列！
+  gap: space between grid items | 网格项目之间的间距
+============================================================ */
+
+/* Mobile-first base: single column | 手机优先基础：单列 */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;  /* single column on mobile | 手机端单列 */
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+/* --- Card Styles 卡片样式 --- */
+.card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);  /* Lab 2 Task 2 | 实验二任务二: border-radius on cards */
+  box-shadow: var(--shadow-sm);     /* Lab 2 Task 2 | 实验二任务二: box-shadow for depth */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  
+  /* 
+    Lab 2 Task 4 | 实验二任务四: :hover transform for 'lift' effect
+    悬停时的 transform 提升效果
+    transition must be set here for smooth animation | 过渡动画必须在此设置
+  */
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card:hover {
+  /*
+    Task 4 | 任务四: transform: translateY(-4px) lifts the card on hover
+    transform: translateY(-4px) 在悬停时将卡片向上提升
+  */
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/*
+  Lab 2 Task 4 | 实验二任务四: grid-column: span 2 for featured card
+  grid-column: span 2 使特色卡片跨越两列
+  This makes the element span 2 grid columns
+  这使元素跨越2个网格列
+*/
+.card-featured {
+  grid-column: span 2;  /* spans full row on tablet+ | 在平板及以上跨越整行 */
+}
+
+.card-figure {
+  margin: 0;
+}
+
+.card-figure img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform var(--transition-mid);
+}
+
+.card:hover .card-figure img {
+  transform: scale(1.03);
+}
+
+.card-body {
+  padding: var(--space-md);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body h3 {
+  font-size: 2.0rem;
+  margin-bottom: var(--space-sm);
+  color: var(--color-primary);
+}
+
+.card-body p {
+  flex: 1;
+  font-size: 1.4rem;
+  color: var(--color-muted);
+  margin-bottom: var(--space-md);
+}
+
+
+/* ============================================================
+  Lab 2 Task 4 | 实验二任务四: 
+  CSS GRID — Sidebar Layout (about.html, skills.html)
+  CSS Grid 侧边栏布局
+  
+  Two-column layout: wider main content + narrower aside
+  两列布局：较宽的主内容区 + 较窄的侧边栏
+  grid-template-columns: 1fr 280px
+  - 1fr: main content takes all remaining space | 主内容占据所有剩余空间
+  - 280px: sidebar is a fixed 280px wide | 侧边栏固定宽度 280px
+============================================================ */
+
+/* Mobile-first: single column (sidebar stacks below) | 手机优先：单列（侧边栏堆叠在下方） */
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: 1fr;  /* mobile: single column | 手机端：单列 */
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.sidebar-widget {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar-widget h3 {
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--color-accent-2);
+}
+
+.sidebar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-list li {
+  padding: var(--space-sm) 0;
+  font-size: 1.4rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-muted);
+}
+
+/*
+  Lab 2 Task 6 | 实验二任务六: :first-child and :last-child
+  :first-child 和 :last-child 伪类
+  Remove top border from first item, bottom border from last item
+  删除第一个项目的顶部边框，删除最后一个项目的底部边框
+*/
+.sidebar-list li:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.sidebar-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.sidebar-list a:link,
+.sidebar-list a:visited {
+  color: var(--color-secondary);
+  font-weight: 500;
+}
+
+.sidebar-list a:hover {
+  color: var(--color-accent-2);
+}
+
+
+/* ============================================================
+  LIST STYLES 列表样式
+============================================================ */
+
+/* Skills ranked ordered list | 技能排名有序列表 */
+.skills-ranked {
+  padding-left: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.skills-ranked li {
+  padding: var(--space-sm) 0;
+  font-size: 1.6rem;
+  border-bottom: 1px solid var(--color-border);
+  line-height: 1.6;
+}
+
+.skills-ranked li:last-child {
+  border-bottom: none;
+}
+
+/* Skills countdown list | 技能倒计时列表 */
+.skills-countdown {
+  padding-left: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.skills-countdown li {
+  padding: var(--space-sm) 0;
+  font-size: 1.5rem;
+  color: var(--color-muted);
+}
+
+/* Technology nested list | 技术嵌套列表 */
+.tech-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tech-list > li {
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tech-list > li:last-child {
+  border-bottom: none;
+}
+
+.tech-list > li > ul {
+  list-style: disc;
+  padding-left: var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+.tech-list > li > ul li {
+  font-size: 1.4rem;
+  color: var(--color-muted);
+  padding: 0.3rem 0;
+}
+
+/* Glossary description list | 词汇表描述列表 */
+.glossary-list {
+  margin: 0;
+}
+
+.glossary-list dt {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xs);
+  padding-left: var(--space-sm);
+  border-left: 3px solid var(--color-accent-2);
+}
+
+.glossary-list dd {
+  font-size: 1.5rem;
+  color: var(--color-muted);
+  margin-left: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px dashed var(--color-border);
+  line-height: 1.7;
+}
+
+/* Info definition list (sidebar) | 信息描述列表（侧边栏） */
+.info-list {
+  margin: 0;
+}
+
+.info-list dt {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: var(--space-sm);
+}
+
+.info-list dd {
+  font-size: 1.4rem;
+  color: var(--color-text);
+  margin-left: 0;
+  margin-bottom: var(--space-xs);
+}
+
+
+/* ============================================================
+  TABLE STYLES 表格样式
+  Lab 2 Task 6 | 实验二任务六: :nth-child alternating row colours
+  :nth-child 交替行颜色
+============================================================ */
+
+.table-responsive {
+  overflow-x: auto;  /* horizontal scroll on small screens | 小屏幕上水平滚动 */
+  margin-bottom: var(--space-md);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.4rem;
+  background-color: var(--color-white);
+}
+
+/* Table cell padding (supplements the border/cellpadding HTML attributes) */
+/* 表格单元格内边距（补充 HTML 的 border/cellpadding 属性） */
+.results-table th,
+.results-table td {
+  padding: 1.2rem 1.6rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.results-table thead {
+  background-color: var(--color-primary);
+  color: var(--color-accent);
+}
+
+.results-table thead th {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+.semester-header {
+  text-align: center;
+  background-color: var(--color-accent-2) !important;
+  color: var(--color-primary) !important;
+  font-size: 1.6rem !important;
+}
+
+.semester-row-header {
+  background-color: rgba(26, 26, 46, 0.04);
+  font-weight: 600;
+  color: var(--color-secondary);
+  font-size: 1.3rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/*
+  Lab 2 Task 6 | 实验二任务六: :nth-child(even) for alternating table rows
+  :nth-child(even) 实现表格交替行颜色
+  
+  tbody tr:nth-child(even) targets every EVEN numbered row
+  tbody tr:nth-child(even) 选择每一个偶数行
+  This creates the classic "zebra striping" table effect
+  这创造了经典的"斑马条纹"表格效果
+*/
+.results-table tbody tr:nth-child(even) {
+  background-color: rgba(232, 213, 183, 0.08);
+}
+
+.results-table tbody tr:nth-child(odd) {
+  background-color: var(--color-white);
+}
+
+.results-table tbody tr:hover {
+  background-color: rgba(201, 169, 110, 0.12);
+  transition: background-color var(--transition-fast);
+}
+
+.pass {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+/* tfoot summary row | tfoot 汇总行 */
+.tfoot-row {
+  background-color: var(--color-secondary) !important;
+  color: var(--color-accent);
+}
+
+.tfoot-row td,
+.tfoot-row strong {
+  color: var(--color-accent);
+  font-size: 1.5rem;
+}
+
+.tfoot-label {
+  font-style: italic;
+}
+
+.table-note {
+  color: var(--color-muted);
+  font-size: 1.2rem;
+  margin-top: var(--space-sm);
+}
+
+
+/* ============================================================
+  PROJECTS PAGE STYLES 项目页面样式
+============================================================ */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.project-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.project-figure {
+  margin: 0;
+  overflow: hidden;
+}
+
+.project-figure img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform var(--transition-mid);
+  display: block;
+}
+
+.project-card:hover .project-figure img {
+  transform: scale(1.04);
+}
+
+.project-figure figcaption {
+  background-color: rgba(26, 26, 46, 0.85);
+  color: var(--color-accent);
+  font-size: 1.2rem;
+  padding: var(--space-sm) var(--space-md);
+  font-style: italic;
+}
+
+.project-info {
+  padding: var(--space-md) var(--space-lg);
+}
+
+.project-info h3 {
+  font-size: 2.0rem;
+  margin-bottom: var(--space-sm);
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  list-style: none;
+  padding: 0;
+  margin: var(--space-sm) 0 var(--space-md);
+}
+
+.project-tags li {
+  background-color: var(--color-primary);
+  color: var(--color-accent);
+  font-size: 1.2rem;
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  font-weight: 500;
+}
+
+/* Float image left beside text (for projects intro) | 在项目介绍中将图片浮动到文字左侧 */
+.float-left-img {
+  float: left;
+  margin: 0 var(--space-md) var(--space-sm) 0;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.intro-media {
+  margin-bottom: var(--space-lg);
+  overflow: hidden;  /* clearfix for float | 清除浮动 */
+}
+
+.intro-media::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+
+/* ============================================================
+  BUTTON STYLES 按钮样式
+  Lab 2 Task 2 | 实验二任务二: border-radius on buttons
+  Lab 2 Task 6 | 实验二任务六: :hover transition, :active scale
+============================================================ */
+
+.btn {
+  display: inline-block;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-primary);
+  color: var(--color-accent) !important;
+  text-decoration: none !important;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);  /* Lab 2 Task 2 | 实验二任务二: border-radius */
+  border: 2px solid var(--color-primary);
+  cursor: pointer;
+  font-family: var(--font-body);
+  letter-spacing: 0.03em;
+  
+  /*
+    transition: smooth colour change on hover
+    过渡动画：悬停时平滑颜色变化
+  */
+  transition: background-color var(--transition-fast), 
+              color var(--transition-fast),
+              border-color var(--transition-fast),
+              transform var(--transition-fast);
+}
+
+.btn:hover {
+  /*
+    Lab 2 Task 6 | 实验二任务六: background-color transition on :hover
+    :hover 时的 background-color 过渡动画
+  */
+  background-color: var(--color-accent-2) !important;
+  color: var(--color-primary) !important;
+  border-color: var(--color-accent-2);
+}
+
+.btn:active {
+  /*
+    Lab 2 Task 6 | 实验二任务六: transform: scale(0.97) on :active
+    :active 时的 transform: scale(0.97) 缩小效果
+  */
+  transform: scale(0.97);
+}
+
+
+/* ============================================================
+  Lab 2 Task 6 | 实验二任务六: 
+  CONTACT FORM STYLES 联系表单样式
+  Professional, consistent styling; no browser defaults
+  专业一致的样式；覆盖浏览器默认样式
+============================================================ */
+
+.contact-form {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.form-fieldset {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-legend {
+  font-family: var(--font-heading);
+  font-size: 2.0rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  padding: 0 var(--space-sm);
+  letter-spacing: 0.02em;
+}
+
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--color-secondary);
+  margin-bottom: var(--space-xs);
+  letter-spacing: 0.02em;
+}
+
+.required-star {
+  color: #c0392b;
+  margin-left: 0.2rem;
+}
+
+/*
+  Lab 2 Task 6 | 实验二任务六: Style ALL form inputs consistently
+  一致地样式化所有表单输入框
+  They must NOT look like browser defaults
+  它们不能看起来像浏览器默认样式
+*/
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form input[type="number"],
+.contact-form input[type="date"],
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  appearance: none;  /* removes native browser styling | 移除浏览器原生样式 */
+  -webkit-appearance: none;
+}
+
+/*
+  Lab 2 Task 6 | 实验二任务六: Visible :focus state
+  可见的 :focus 状态
+  
+  CRITICAL for accessibility | 无障碍访问的关键
+  box-shadow in accent colour instead of browser default outline
+  使用强调色的 box-shadow 代替浏览器默认轮廓
+  Do NOT use outline: none without a replacement!
+  不要在没有替代方案的情况下使用 outline: none！
+*/
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--color-accent-2);
+  box-shadow: var(--shadow-focus);  /* accessible focus ring | 无障碍焦点环 */
+  background-color: var(--color-white);
+}
+
+.contact-form input[type="range"] {
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.contact-form input[type="range"]:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 150px;
+  line-height: 1.6;
+}
+
+.contact-form select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%231a1a2e' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.2rem center;
+  padding-right: 3.5rem;
+}
+
+/* Checkbox and radio group layout | 复选框和单选按钮组布局 */
+.checkbox-group,
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.check-item,
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+  background-color: var(--color-surface);
+}
+
+.check-item:hover,
+.radio-item:hover {
+  border-color: var(--color-accent-2);
+  background-color: rgba(201, 169, 110, 0.08);
+}
+
+.check-item label,
+.radio-item label {
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.fieldset-hint {
+  margin-bottom: var(--space-md);
+}
+
+/* Range slider labels | 滑块标签 */
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-xs);
+}
+
+/* Character hint | 字符提示 */
+.char-hint {
+  display: block;
+  margin-top: var(--space-xs);
+  color: var(--color-muted);
+  font-size: 1.2rem;
+}
+
+/* Form action buttons row | 表单操作按钮行 */
+.form-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: flex-start;
+  margin-top: var(--space-lg);
+}
+
+.btn-submit {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  padding: var(--space-md) var(--space-lg);
+  font-size: 1.6rem;
+}
+
+.btn-reset {
+  background-color: transparent;
+  color: var(--color-muted) !important;
+  border-color: var(--color-border);
+}
+
+.btn-reset:hover {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text) !important;
+}
+
+
+/* ============================================================
+  SECTION WELCOME (index.html) 欢迎区块样式
+============================================================ */
+
+.section-welcome {
+  max-width: 760px;
+}
+
+.section-pages {
+  margin-top: var(--space-xl);
+}
+
+
+/* ============================================================
+  Lab 2 Task 5 | 实验二任务五: 
+  RESPONSIVE DESIGN — Mobile-First Media Queries
+  响应式设计 — 手机优先媒体查询
+  
+  STRATEGY: Write base styles for smallest screen first (320px)
+  策略：首先为最小屏幕编写基础样式（320px）
+  Then ADD styles for larger screens with min-width queries
+  然后用 min-width 查询为较大屏幕添加样式
+  
+  This is MOBILE-FIRST — base CSS is for mobile
+  这是手机优先 — 基础 CSS 针对手机端
+  
+  The OPPOSITE approach (desktop-first) would use max-width
+  相反的方法（桌面优先）会使用 max-width
+  Mobile-first is BETTER: lighter CSS, easier to maintain
+  手机优先更好：CSS 更轻量，更易维护
+============================================================ */
+
+/* ================================================================
+  TABLET: @media (min-width: 600px)
+  平板：最小宽度 600px
+  
+  At 600px+:
+  - Card grid → 2 columns | 卡片网格 → 2列
+  - Header → two-column Flex row | Header → 两列 Flex 行
+  ================================================================ */
+@media (min-width: 600px) {
+
+  /* Card grid: 2 columns on tablet | 平板端卡片网格：2列 */
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Projects grid: 2 columns | 项目网格：2列 */
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Header: show profile image beside title text | Header：在标题旁显示头像 */
+  .site-header {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  .site-title {
+    flex: 1;
+  }
+
+  .site-tagline {
+    flex-basis: auto;
+  }
+
+  /* Sidebar: 2-column layout activates | 侧边栏：2列布局激活 */
+  .sidebar-layout {
+    grid-template-columns: 1fr 280px;
+    /*
+      1fr = main content takes all remaining space | 主内容占所有剩余空间
+      280px = sidebar fixed width | 侧边栏固定宽度 280px
+      gap: 3.2rem — space between main and sidebar | 主内容与侧边栏之间的间距
+    */
+  }
+
+  /* Form actions side-by-side | 表单操作按钮并排 */
+  .form-actions {
+    justify-content: flex-start;
+  }
+
+}
+
+/* ================================================================
+  DESKTOP: @media (min-width: 1024px)
+  桌面：最小宽度 1024px
+  
+  At 1024px+:
+  - Full 3-column card grid | 完整3列卡片网格
+  - Sidebar layout activated | 侧边栏布局激活
+  - Nav fully horizontal | 导航完全水平
+  ================================================================ */
+@media (min-width: 1024px) {
+
+  /* Card grid: 3 columns on desktop | 桌面端卡片网格：3列 */
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    /*
+      auto-fit vs auto-fill 区别:
+      auto-fit: empty tracks COLLAPSE — items stretch to fill row
+                空轨道折叠 — 项目拉伸以填满行
+      auto-fill: empty tracks REMAIN — gaps left at end of row
+                空轨道保留 — 行末留有空白
+      Use auto-fit for card grids where items should fill the container
+      卡片网格使用 auto-fit，项目应填满容器
+    */
+  }
+
+  /* Sidebar: wider layout on desktop | 桌面端更宽的侧边栏布局 */
+  .sidebar-layout {
+    grid-template-columns: 1fr 300px;
+    gap: var(--space-xl);
+  }
+
+  /* Larger heading sizes on desktop | 桌面端更大的标题尺寸 */
+  h1 { font-size: 6.0rem; }
+  h2 { font-size: 4.2rem; }
+  h3 { font-size: 2.8rem; }
+
+  .site-title { font-size: 5.0rem; }
+
+  /* Full 3-column projects grid | 完整3列项目网格 */
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+/* ================================================================
+  LARGE DESKTOP: @media (min-width: 1280px)
+  大桌面：最小宽度 1280px
+================================================================ */
+@media (min-width: 1280px) {
+
+  .site-main {
+    padding: var(--space-xl) var(--space-lg);
+  }
+
+  blockquote {
+    margin: var(--space-xl) 0;
+    padding: var(--space-lg) var(--space-xl);
+  }
+
+}
+
+/* ================================================================
+  Mobile Nav: collapse to vertical stack
+  手机导航：折叠为垂直堆叠
+  (base styles = mobile, this is the mobile-first base)
+================================================================ */
+@media (max-width: 599px) {
+
+  /* Nav links collapse to vertical stack on mobile | 手机端导航链接折叠为垂直堆叠 */
+  .nav-list {
+    flex-direction: column;  
+    width: 100%;
+    gap: 0;
+  }
+
+  .nav-list a {
+    border-radius: 0;
+    border-bottom: 1px solid rgba(232, 213, 183, 0.1);
+  }
+
+  .site-nav {
+    padding: 0 var(--space-md);
+  }
+
+  /* Header: single column on mobile | 手机端 Header 单列 */
+  .site-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .site-title {
+    font-size: 3.2rem;
+  }
+
+  /* All Grid layouts revert to single column | 所有 Grid 布局回退到单列 */
+  .card-grid,
+  .sidebar-layout,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Featured card spans only 1 column on mobile | 特色卡片在手机端只占1列 */
+  .card-featured {
+    grid-column: span 1;
+  }
+
+  .site-main {
+    padding: var(--space-md);
+  }
+
+  .form-fieldset {
+    padding: var(--space-md);
+  }
+
+  h1 { font-size: 3.6rem; }
+  h2 { font-size: 2.8rem; }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn-submit,
+  .btn-reset {
+    width: 100%;
+    text-align: center;
+  }
+
+}
+
+/* ============================================================
+  PRINT STYLES 打印样式
+  Hide nav, footer for printing | 打印时隐藏导航和页脚
+============================================================ */
+@media print {
+  .site-nav,
+  .site-footer,
+  .btn {
+    display: none;
+  }
+  
+  body {
+    font-size: 12pt;
+    color: #000;
+    background: #fff;
+  }
+}
