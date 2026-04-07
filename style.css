@@ -209,3 +209,19 @@ footer {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+/* make page full height */
+html, body {
+    height: 100%;
+}
+
+/* layout structure */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* push footer down */
+main {
+    flex: 1;
+}
